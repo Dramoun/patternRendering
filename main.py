@@ -1,4 +1,6 @@
 import pygame
+import numpy as np
+from random import randrange
 from sys import exit
 
 """
@@ -17,7 +19,7 @@ class Pattern:
         self.pattern = {}
 
         self.gameName = 'Pattern renders'
-        self.gameRes = (640, 640)
+        self.gameRes = (1000, 1000)
         self.gameScreen = pygame.display.set_mode(self.gameRes)
 
         self.midX = self.gameRes[0] / 2
@@ -30,9 +32,10 @@ class Pattern:
     def render(self):
         pygame.init()
         pygame.display.set_caption(self.gameName)
-        self.gameScreen.fill((255, 255, 255))
+        self.gameScreen.fill((0, 0, 0))
+        pygame.draw.rect(self.gameScreen, (0, 0, 0), pygame.Rect(0, 0, 640, 640), 1)
 
-        self.shape()
+        self.shape(7)
 
         while self.running:
 
@@ -45,10 +48,43 @@ class Pattern:
 
             pygame.display.update()
 
-    def shape(self):
-        pygame.draw.line(self.gameScreen, (50, 50, 50), (0, 0), (640, 640), 3)
-        pygame.draw.line(self.gameScreen, (50, 50, 50), (640, 0), (0, 640), 3)
-        pygame.draw.rect(self.gameScreen, (255, 0, 0), pygame.Rect(318, 318, 4, 4))
+    def shape(self, perSide):
+
+        breakPoints = []
+        scrSize = self.gameRes[0]
+
+        for poNum in range(perSide):
+
+            pointCord = int((poNum + 1) * (scrSize / (perSide + 1)))
+            breakPoints.append((pointCord, 0))
+            breakPoints.append((pointCord, scrSize))
+            breakPoints.append((0, pointCord))
+            breakPoints.append((scrSize, pointCord))
+
+        breakPoints.append((0, 0))
+        breakPoints.append((scrSize, 0))
+        breakPoints.append((0, scrSize))
+        breakPoints.append((scrSize, scrSize))
+
+        self.allPoints(breakPoints)
+
+    def allPoints(self, pointList):
+
+        if len(pointList) == 0:
+            return True
+
+        mainPoint = pointList[0]
+        lst = pointList[1:]
+
+        for lstLen in range(len(lst)):
+
+            randRed = randrange(0, 255)
+            randBlue = randrange(50, 150)
+            randGreen = randrange(0, 255)
+
+            pygame.draw.line(self.gameScreen, (randRed, randBlue, 255), mainPoint, lst[lstLen], 1)
+
+        self.allPoints(lst)
 
 
 Pattern().render()
