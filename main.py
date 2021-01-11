@@ -19,8 +19,10 @@ class Pattern:
         self.pattern = {}
 
         self.gameName = 'Pattern renders'
-        self.gameRes = (1000, 1000)
+        self.gameRes = (2560, 1440)#(1000, 1000)#
         self.gameScreen = pygame.display.set_mode(self.gameRes)
+
+        self.taskBarSize = 60
 
         self.midX = self.gameRes[0] / 2
         self.midY = self.gameRes[1] / 2
@@ -35,7 +37,9 @@ class Pattern:
         self.gameScreen.fill((0, 0, 0))
         pygame.draw.rect(self.gameScreen, (0, 0, 0), pygame.Rect(0, 0, 640, 640), 1)
 
-        self.shape(7)
+        self.breakPoints(5)
+
+        pygame.image.save(self.gameScreen, "screenshot.jpg")
 
         while self.running:
 
@@ -48,28 +52,32 @@ class Pattern:
 
             pygame.display.update()
 
-    def shape(self, perSide):
+    def breakPoints(self, perSide):
 
         breakPoints = []
-        scrSize = self.gameRes[0]
+        scrSizeX = self.gameRes[0]
+        scrSizeY = self.gameRes[1]-self.taskBarSize
 
         for poNum in range(perSide):
 
-            pointCord = int((poNum + 1) * (scrSize / (perSide + 1)))
-            breakPoints.append((pointCord, 0))
-            breakPoints.append((pointCord, scrSize))
-            breakPoints.append((0, pointCord))
-            breakPoints.append((scrSize, pointCord))
+            pointCordX = int((poNum + 1) * (scrSizeX / (perSide + 1)))
+            pointCordY = int((poNum + 1) * (scrSizeY / (perSide + 1)))
+
+            breakPoints.append((pointCordX, 0))
+            breakPoints.append((pointCordX, scrSizeY))
+            breakPoints.append((0, pointCordY))
+            breakPoints.append((scrSizeX, pointCordY))
 
         breakPoints.append((0, 0))
-        breakPoints.append((scrSize, 0))
-        breakPoints.append((0, scrSize))
-        breakPoints.append((scrSize, scrSize))
+        breakPoints.append((scrSizeX, 0))
+        breakPoints.append((0, scrSizeY))
+        breakPoints.append((scrSizeX, scrSizeY))
 
+        print(breakPoints)
         self.allPoints(breakPoints)
 
     def allPoints(self, pointList):
-
+        toggleBool = False
         if len(pointList) == 0:
             return True
 
@@ -77,12 +85,13 @@ class Pattern:
         lst = pointList[1:]
 
         for lstLen in range(len(lst)):
+            if toggleBool or mainPoint[0] != lst[lstLen][0] and mainPoint[1] != lst[lstLen][1]:
+                print(lst[lstLen])
+                randRed = randrange(0, 200)
+                randBlue = randrange(0, 200)
+                randGreen = randrange(0, 200)
 
-            randRed = randrange(0, 255)
-            randBlue = randrange(50, 150)
-            randGreen = randrange(0, 255)
-
-            pygame.draw.line(self.gameScreen, (randRed, randBlue, 255), mainPoint, lst[lstLen], 1)
+                pygame.draw.line(self.gameScreen, (randRed, randBlue, 225), mainPoint, lst[lstLen], 3)
 
         self.allPoints(lst)
 
