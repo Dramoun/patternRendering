@@ -73,7 +73,6 @@ class Pattern:
         breakPoints.append((0, scrSizeY))
         breakPoints.append((scrSizeX, scrSizeY))
 
-        print(breakPoints)
         self.allPoints(breakPoints)
 
     def allPoints(self, pointList):
