@@ -3,28 +3,36 @@ from random import randrange
 
 skk = turtle.Turtle()
 turtle.colormode(255)
-skk.speed(100)
+skk.speed(1000)
+skk.screen.bgcolor((150,150,150))
 
-for x in range(4):
-    for i in range(40):
-        randRed = randrange(0, 200)
-        randBlue = randrange(0, 200)
-        randGreen = randrange(0, 200)
+for x in range(8):
+    for i in range(10):
 
-        #skk.pencolor((randRed, randBlue, randGreen))
+        skk.color((250-(25*(i+1)), 0, 0))
+        skk.down()
+        skk.forward((i+1)*18)
+        skk.right(30)
 
-        if i % 3 == 1:
-            skk.color((randRed,100,100))
+    skk.up()
+    skk.home()
+    skk.right((x+1)*45)
 
-        elif i % 3 == 2:
-            skk.color((100,randBlue,100))
 
-        else:
-            skk.color((100,100,randGreen))
+skk.up()
+skk.home()
 
-        skk.circle((x*50)+50)
-        skk.left(9)
+for x in range(8):
+    for i in range(10):
+        skk.color((250-(25*(i+1)), 0, 0))
 
+        skk.down()
+        skk.forward((i+1)*18)
+        skk.left(30)
+
+    skk.up()
+    skk.home()
+    skk.left((x+1)*45)
 
 skk.hideturtle()
 turtle.done()
