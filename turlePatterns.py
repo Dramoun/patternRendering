@@ -3,36 +3,29 @@ from random import randrange
 
 skk = turtle.Turtle()
 turtle.colormode(255)
-skk.speed(1000)
-skk.screen.bgcolor((150,150,150))
-
-for x in range(8):
-    for i in range(10):
-
-        skk.color((250-(25*(i+1)), 0, 0))
-        skk.down()
-        skk.forward((i+1)*18)
-        skk.right(30)
-
-    skk.up()
-    skk.home()
-    skk.right((x+1)*45)
+skk.speed(10)
 
 
-skk.up()
-skk.home()
+def shape(ln):
+    skk.down()
+    skk.forward(ln)
+    for dud in range(4):
 
-for x in range(8):
-    for i in range(10):
-        skk.color((250-(25*(i+1)), 0, 0))
+        skk.right(72)
+        skk.forward(ln/2)
+        skk.backward(ln/2)
 
-        skk.down()
-        skk.forward((i+1)*18)
-        skk.left(30)
+    skk.right(72)
+    if ln > 10:
+        shape(ln/2)
+
+
+for x in range(6):
 
     skk.up()
     skk.home()
-    skk.left((x+1)*45)
+    skk.left((x+1)*60)
+    shape(150)
 
 skk.hideturtle()
 turtle.done()
