@@ -3,29 +3,63 @@ from random import randrange
 
 skk = turtle.Turtle()
 turtle.colormode(255)
-skk.speed(10)
+skk.speed(1)
+skk.color("green")
+skk.left(90)
+ln = 50
+skk.forward(ln)
+par = skk.position()
 
 
-def shape(ln):
-    skk.down()
-    skk.forward(ln)
-    for dud in range(4):
+def dud(ln,parr,neg = False ):
+    newlen = ln/2
 
-        skk.right(72)
-        skk.forward(ln/2)
-        skk.backward(ln/2)
+    newPos = parr
+    if ln > 6.24:
 
-    skk.right(72)
-    if ln > 10:
-        shape(ln/2)
+        if neg:
+            skk.left(-30)
+            turn = 30
+        else:
+            skk.left(30)
+            turn = -30
+
+        skk.forward(ln)
+        newPos = skk.position()
+
+        dud(newlen, newPos, False)
+        skk.up()
+        skk.goto(parr)
+        skk.left(turn)
+        skk.down()
+        dud(newlen, newPos, True)
 
 
-for x in range(6):
 
-    skk.up()
-    skk.home()
-    skk.left((x+1)*60)
-    shape(150)
+dud(ln,par,False)
+
+
+def shape():
+
+
+
+
+
+
+
+    pass
+
+
+
+
+
+
+
+
+
+
+
+
 
 skk.hideturtle()
 turtle.done()

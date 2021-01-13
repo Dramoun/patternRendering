@@ -19,7 +19,7 @@ class Pattern:
         self.pattern = {}
 
         self.gameName = 'Pattern renders'
-        self.gameRes = (2560, 1440)#(1000, 1000)#
+        self.gameRes = (2560, 1440)  # (1000, 1000)
         self.gameScreen = pygame.display.set_mode(self.gameRes)
 
         self.taskBarSize = 60
@@ -56,7 +56,7 @@ class Pattern:
 
         breakPoints = []
         scrSizeX = self.gameRes[0]
-        scrSizeY = self.gameRes[1]-self.taskBarSize
+        scrSizeY = self.gameRes[1] - self.taskBarSize
 
         for poNum in range(perSide):
 
