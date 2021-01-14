@@ -3,63 +3,45 @@ from random import randrange
 
 skk = turtle.Turtle()
 turtle.colormode(255)
-skk.speed(1)
-skk.color("green")
+skk.speed(100000)
 skk.left(90)
-ln = 50
-skk.forward(ln)
-par = skk.position()
 
 
-def dud(ln,parr,neg = False ):
-    newlen = ln/2
+def binaryTree():
+    wd = 15
+    skk.up()
+    skk.goto(0, -400)
+    skk.down()
+    ln = 200
 
-    newPos = parr
-    if ln > 6.24:
+    def dud(ln, wd):
 
-        if neg:
-            skk.left(-30)
-            turn = 30
-        else:
-            skk.left(30)
-            turn = -30
+        if ln > 10:
+            if ln > 70:
+                skk.color("brown")
+            else:
+                skk.color("green")
 
-        skk.forward(ln)
-        newPos = skk.position()
+            skk.width(wd*0.8)
+            newWd = wd*0.8
 
-        dud(newlen, newPos, False)
-        skk.up()
-        skk.goto(parr)
-        skk.left(turn)
-        skk.down()
-        dud(newlen, newPos, True)
+            skk.forward(ln)
 
+            skk.left(45)
 
+            dud(ln*0.75,newWd)
 
-dud(ln,par,False)
+            skk.right(90)
 
+            dud(ln*0.75,newWd)
+            skk.left(45)
+            skk.up()
+            skk.forward(-ln)
+            skk.down()
 
-def shape():
+    dud(ln,wd)
 
-
-
-
-
-
-
-    pass
-
-
-
-
-
-
-
-
-
-
-
-
+binaryTree()
 
 skk.hideturtle()
 turtle.done()
